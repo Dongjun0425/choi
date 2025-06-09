@@ -29,37 +29,13 @@ function News() {
         },
     ];
 
-    // 리스트형 뉴스 데이터
-    const listPosts = [
-        {
-            id: 101,
-            title: "아이폰 발열",
-            summary: "성능은 좋지만 열을 잡지 못해",
-            date: "2025.06.09"
-        },
-        {
-            id: 102,
-            title: "여름준비",
-            summary: "얼음물 준비",
-            date: "2025.06.08"
-        },
-        {
-            id: 103,
-            title: "재택근무 효과 분석",
-            summary: "성과 향상? 비용 절감? 현실은?",
-            date: "2025.06.06"
-        }
-    ];
-
     const categories = ['전체', '학교', '음식', '도서'];
     const [selectedCategory, setSelectedCategory] = useState('전체');
-    const [searchText, setSearchText] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 6;
 
     const filteredAnnouncements = allAnnouncements.filter(item =>
-        (selectedCategory === '전체' || item.category === selectedCategory) &&
-        (item.title.includes(searchText) || item.content.includes(searchText))
+        selectedCategory === '전체' || item.category === selectedCategory
     );
 
     const paginated = filteredAnnouncements.slice(
@@ -71,10 +47,6 @@ function News() {
 
     const handleAnnouncementClick = (announcement) => {
         navigate(`/announcement/${announcement.id}`, { state: announcement });
-    };
-
-    const handlePostClick = (post) => {
-        navigate(`/post/${post.id}`, { state: post });
     };
 
     return (
@@ -106,25 +78,6 @@ function News() {
                         {category}
                     </button>
                 ))}
-            </div>
-
-            {/* 검색창 */}
-            <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                <input
-                    type="text"
-                    value={searchText}
-                    onChange={(e) => {
-                        setSearchText(e.target.value);
-                        setCurrentPage(1);
-                    }}
-                    placeholder="검색어를 입력하세요"
-                    style={{
-                        padding: '10px',
-                        width: '300px',
-                        borderRadius: '8px',
-                        border: '1px solid #ccc'
-                    }}
-                />
             </div>
 
             {/* 카드 리스트 */}
@@ -199,33 +152,6 @@ function News() {
                         {i + 1}
                     </button>
                 ))}
-            </div>
-
-            {/* 리스트형 게시글 */}
-            <div style={{ borderTop: "1px solid #ddd", paddingTop: "40px" }}>
-                <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "20px" }}>최신 뉴스 목록</h2>
-                <ul style={{ listStyle: "none", padding: 0 }}>
-                    {listPosts.map(post => (
-                        <li
-                            key={post.id}
-                            onClick={() => handlePostClick(post)}
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '15px 10px',
-                                borderBottom: '1px solid #eee',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            <div>
-                                <strong style={{ fontSize: '16px' }}>{post.title}</strong>
-                                <p style={{ margin: '5px 0', fontSize: '14px', color: '#666' }}>{post.summary}</p>
-                            </div>
-                            <span style={{ fontSize: '13px', color: '#999' }}>{post.date}</span>
-                        </li>
-                    ))}
-                </ul>
             </div>
         </div>
     );
