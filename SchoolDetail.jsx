@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
+
 import {
   Chart as ChartJS,
   BarElement,
