@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
+
+
 function News() {
     // 페이지 이동을 위한 navigate 함수 생성
     const navigate = useNavigate();
